@@ -64,46 +64,71 @@ let queenRawValue = queen.rawValue
 let jack = Rank.jack
 let jackRawValue = jack.rawValue
 
-print("Card 1 is Ace")
-print("-------------")
-print(compareRank(card1: ace, card2: ace))
-print(compareRank(card1: ace, card2: king))
-print(compareRank(card1: ace, card2: queen))
-print(compareRank(card1: ace, card2: jack))
+let cards = [ace, king, queen, jack]
+let cardVals = [aceRawValue, kingRawValue, queenRawValue, jackRawValue]
 
-print("==================")
+for card1 in cards {
+    for card2 in cards {
+        print(compareRank(card1: card1, card2: card2))
+    }
+}
 
-print("Card 1 is King")
-print("--------------")
-print(compareRank(card1: king, card2: ace))
-print(compareRank(card1: king, card2: king))
-print(compareRank(card1: king, card2: queen))
-print(compareRank(card1: king, card2: jack))
+if let convertedRank = Rank(rawValue: 3) {
+    let threeDescription = convertedRank.simpleDescription()
+}
 
-print("==================")
+enum Suit {
+    case spades, hearts, diamonds, clubs
+    
+    func simpleDescription() -> String {
+        switch self {
+        case .spades:
+            return "spades"
+        case .hearts:
+            return "hearts"
+        case .diamonds:
+            return "diamonds"
+        case .clubs:
+            return "clubs"
+        }
+    }
+    func color() -> String {
+        switch self {
+        case .spades, .clubs:
+            return "black"
+        case .hearts, .diamonds:
+            return "red"
+        }
+    }
+}
 
-print("Card 1 is Queen")
-print("---------------")
-print(compareRank(card1: queen, card2: ace))
-print(compareRank(card1: queen, card2: king))
-print(compareRank(card1: queen, card2: queen))
-print(compareRank(card1: queen, card2: jack))
+let suits = [Suit.hearts, Suit.clubs, Suit.diamonds, Suit.spades]
+for suit in suits {
+    print("\(suit.simpleDescription()) are \(suit.color())")
+}
 
-print("==================")
+enum ServerResponse {
+    case result(String, String)
+    case failure(String)
+}
 
-print("Card 1 is Jack")
-print("--------------")
-print(compareRank(card1: jack, card2: ace))
-print(compareRank(card1: jack, card2: king))
-print(compareRank(card1: jack, card2: queen))
-print(compareRank(card1: jack, card2: jack))
+let success = ServerResponse.result("6.00 am", "8:09 pm")
+let failure = ServerResponse.failure("Out of cheese.")
 
-print("==================")
+switch success {
+case let .result(sunrise, sunset):
+    print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+case let .failure(message):
+    print("Failure... \(message)")
+}
 
-let card1 = Rank.ace
-let card1RawValue = ace.rawValue
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    func simpleDescription() -> String {
+        return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+    }
+}
+let threeOfSpades = Card(rank: .three, suit: .spades)
+let threeOfSpadesDescription = threeOfSpades.simpleDescription()
 
-let card2 = Rank.king
-let card2RawValue = king.rawValue
-
-print(compareRank(card1: card1, card2: card2))

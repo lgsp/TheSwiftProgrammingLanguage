@@ -57,7 +57,7 @@ let maxValue = UInt8.max // maxValue is equal to 255, and is of type UInt8
 let meaningOfLife = 42
 // meaningOfLife is inferred to be of type Int
 
-let pi = 3.14159
+var pi = 3.14159
 // pi is inferred to be of type Double
 
 let anotherPi = 3 + 0.14159
@@ -78,3 +78,25 @@ let oneMillion = 1_000_000
 let justOverOneMillion = 1_000_000.000_000_1
 
 // Numeric Type Conversion
+//let cannotBeNegative: UInt8 = -1
+// UInt8 can't store negative numnbers, and so this will report an error
+//let tooBig: Int8 = Int8.max + 1
+// Int8 can't store a number larger than its maximum value,
+// and so this will also report an error
+
+let twoThousand: UInt16 = 2_000
+let one: UInt8 = 1
+let twoThousandAndOne = twoThousand + UInt16(one)
+
+// Integer and Floating-Point Conversion
+let three = 3
+let pointOneFourOneFiveNine = 0.14159
+pi = Double(three) + pointOneFourOneFiveNine
+// pi equals 3.14159, and is inferred to be of type Double
+
+let integerPi = Int(pi)
+// integerPi equals 3, and is inferred to be of type Int
+
+// Type Aliases
+
+
